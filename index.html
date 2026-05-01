@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Abhisha!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #E0B0FF; /* Soft Lavender */
+            --secondary-color: #C4A1FF; /* Lighter Lavender */
+            --background-color: #121212; /* Deep Charcoal */
+            --text-color: #EAEAEA;
+            --card-background: #1E1E1E;
+            --border-color: rgba(224, 176, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeInUp 1s ease-out 0.5s;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        /* --- Journey Section --- */
+        .journey {
+            padding: 4rem 0;
+        }
+
+        .journey h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container.left {
+            left: 0;
+        }
+
+        .timeline-container.right {
+            left: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--secondary-color);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--card-background);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+        }
+
+        /* --- Gallery Section --- */
+        .gallery {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .gallery h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item img {
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+        /* --- Puzzle Section --- */
+        .puzzle {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .puzzle h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        #puzzle-container {
+            margin: 2rem auto;
+            max-width: 400px;
+        }
+
+        #puzzle-message {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        #puzzle-input {
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        /* --- Final Message Section --- */
+        .final-message {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .final-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .final-message p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="particle-canvas"></canvas>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Happy Birthday, Abhisha!</h1>
+            <p>Welcome to a little corner of the universe I made just for you.</p>
+        </div>
+        <div class="scroll-down">Scroll down to begin the journey</div>
+    </section>
+
+    <div class="container">
+        <section class="journey">
+            <h2>Our Journey Together</h2>
+            <div class="timeline">
+                <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3>The Day We Met</h3>
+                        <p>A moment that changed my world forever. I still remember...</p>
+                    </div>
+                </div>
+                <div class="timeline-container right">
+                    <div class="timeline-content">
+                        <h3>Our First Adventure</h3>
+                        <p>Sharing our first kisses at school.</p>
+                    </div>
+                </div>
+                 <div class="timeline-container left">
+                    <div class="timeline-content">
+                        <h3>Through Thick and Thin</h3>
+                        <p>We've faced so much together, and it's only made us stronger.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery">
+            <h2>A Few of My Favorite Moments</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://cdn.corenexis.com/files/c/7491788720.jpg?text=Our+First+Photo" alt="Memory 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.corenexis.com/files/c/8123576720.jpg?text=That+Funny+Face" alt="Memory 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.corenexis.com/files/c/7363995720.jpg?text=Celebrating+You" alt="Memory 3">
+                </div>
+            </div>
+        </section>
+
+        <section class="puzzle">
+            <h2>A Little Game for You</h2>
+            <div id="puzzle-container">
+                <p id="puzzle-message">Who is our biggest enemy at school???</p>
+                <input type="text" id="puzzle-input" placeholder="Your answer...">
+            </div>
+        </section>
+
+        <section class="final-message">
+            <h2>To My Dearest Abhisha,</h2>
+            <p>Every day with you is a gift. You bring so much joy and light into my life. I hope this little website brings a smile to your face and reminds you of how much you mean to me. Happy Birthday, my love. Here's to many more adventures together. And don't forget that i love you!!!  -Anay</p>
+        </section>
+    </div>
+    
+    <canvas id="confetti-canvas"></canvas>
+
+    <script>
+        // Particle.js for hero background
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+
+        const particleConfig = {
+            count: 50,
+            speed: 0.5,
+            color: 'rgba(224, 176, 255, 0.5)'
+        };
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = Math.random() * 2 - 1;
+            this.vy = Math.random() * 2 - 1;
+            this.radius = Math.random() * 1.5 + 0.5;
+        }
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = particleConfig.color;
+            ctx.fill();
+        };
+
+        Particle.prototype.update = function() {
+            this.x += this.vx * particleConfig.speed;
+            this.y += this.vy * particleConfig.speed;
+
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        };
+
+        function initParticles() {
+            for (let i = 0; i < particleConfig.count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            initParticles();
+        });
+
+
+        // Puzzle Logic
+        const puzzleInput = document.getElementById('puzzle-input');
+        puzzleInput.addEventListener('keydown', (e) => {
+   if (e.key === 'Enter') {
+
+                if
+             (e.target.value.toLowerCase() === "geeta ma'am") { // Replace with the actual answer
+                triggerConfetti();
+                document.getElementById('puzzle-message').textContent = 'You got it! 🎉';
+              }
+            }
+        });
+
+        // Confetti Logic
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        let confettiPieces = [];
+
+        function triggerConfetti() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            for(let i=0; i<200; i++) {
+                confettiPieces.push(new ConfettiPiece());
+            }
+
+            animateConfetti();
+        }
+        
+        function ConfettiPiece() {
+            this.x = Math.random() * confettiCanvas.width;
+            this.y = -20;
+            this.w = Math.random() * 10 + 5;
+            this.h = Math.random() * 20 + 10;
+            this.speed = Math.random() * 3 + 2;
+            this.gravity = 0.5;
+            this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        }
+        
+        function animateConfetti() {
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            confettiPieces.forEach((piece, index) => {
+                piece.y += piece.speed;
+                piece.speed += piece.gravity / 10;
+                
+                confettiCtx.fillStyle = piece.color;
+                confettiCtx.fillRect(piece.x, piece.y, piece.w, piece.h);
+                
+                if(piece.y > confettiCanvas.height) {
+                    confettiPieces.splice(index, 1);
+                }
+            });
+            
+            if(confettiPieces.length > 0) {
+                requestAnimationFrame(animateConfetti);
+            }
+        }
+
+    </script>
+</body>
+</html>
